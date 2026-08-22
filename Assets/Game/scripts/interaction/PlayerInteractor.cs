@@ -3,9 +3,12 @@ using UnityEngine;
 public class PlayerInteractor : MonoBehaviour
 {
     [SerializeField] private Camera playerCamera;
+    [SerializeField] private InteractionUI interactionUI;
     [SerializeField] private float interactionDistance = 3f;
 
     private Rem_InputActions inputActions;
+
+    private IInteractable currentInteractable;
 
     private void Awake()
     {
@@ -24,31 +27,29 @@ public class PlayerInteractor : MonoBehaviour
 
     private void Update()
     {
-        if (inputActions.Player.Interact.WasPressedThisFrame())
-        {
-            TryInteract();
+        CheckForInteractable();
+
+        if(currentInteractable != null && inputActions.Player.Interact.WasPressedThisFrame()) {
+            currentInteractable.Interact();
         }
     }
 
-    private void TryInteract()
+    private void CheckForInteractable()
     {
-        Ray ray = new Ray(
-            playerCamera.transform.position,
-            playerCamera.transform.forward
-        );
+        Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
 
-        if (Physics.Raycast(
-            ray,
-            out RaycastHit hit,
-            interactionDistance
-        ))
+        if (Physics.Raycast(ray, out RaycastHit hit, interactionDistance))
         {
-            IInteractable interactable =
-                hit.collider.GetComponent<IInteractable>();
+            currentInteractable = hit.collider.GetComponent<IInteractable>();
 
-            if (interactable != null)
+            if (currentInteractable != null)
             {
-                interactable.Interact();
+                interactionUI.Show();
+                Debug.Log("looking at: " + currentInteractable);
+            }
+            else{
+                interactionUI.Hide();
+                Debug.Log("no interactable");
             }
         }
     }
