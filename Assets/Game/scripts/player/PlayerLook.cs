@@ -1,4 +1,5 @@
 
+using System.Diagnostics;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -38,9 +39,11 @@ public class PlayerLook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
        Vector2 lookInput=inputActions.Player.Look.ReadValue<Vector2>();
         float mouseX = lookInput.x * sensitivity;
         float mouseY = lookInput.y * sensitivity;
+
         transform.Rotate(UnityEngine.Vector3.up * mouseX);
 
         verticalRotation -= mouseY;

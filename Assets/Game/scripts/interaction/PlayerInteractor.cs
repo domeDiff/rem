@@ -30,27 +30,33 @@ public class PlayerInteractor : MonoBehaviour
         CheckForInteractable();
 
         if(currentInteractable != null && inputActions.Player.Interact.WasPressedThisFrame()) {
-            currentInteractable.Interact();
+            currentInteractable.Interact();    
         }
     }
 
     private void CheckForInteractable()
     {
+        currentInteractable = null;
+
         Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
+
+        Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * interactionDistance, Color.red);
 
         if (Physics.Raycast(ray, out RaycastHit hit, interactionDistance))
         {
             currentInteractable = hit.collider.GetComponent<IInteractable>();
-
-            if (currentInteractable != null)
-            {
-                interactionUI.Show();
-                Debug.Log("looking at: " + currentInteractable);
-            }
-            else{
-                interactionUI.Hide();
-                Debug.Log("no interactable");
-            }
         }
+
+        if (currentInteractable != null)
+        {
+            interactionUI.Show();
+            Debug.Log("looking at: " + currentInteractable);
+        }
+        else
+        {
+            interactionUI.Hide();
+            Debug.Log("no interactable");
+        }
+
     }
 }
