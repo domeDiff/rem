@@ -9,10 +9,25 @@ public class ClockInteractable : MonoBehaviour, IInteractable
     {
         clockUI.ShowTime();
 
+        if (!dreamState.hasSeenClock)
+        {
+            Debug.Log("reads 3:17 AM");
+            dreamState.hasSeenClock = true;
+            return;
+        }
+
+        if(dreamState.timeSinceClockSeen >= dreamState.clockAnamolyTime)
+        {
+            Debug.Log("still reads 3:17 AM");
+        }
+
+        else
+        {
+            Debug.Log("reads 3:17 AM");
+        }
+
         dreamState.hasSeenClock = true;
 
-        Debug.Log("shows 3:17 AM");
+        
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    
 }
