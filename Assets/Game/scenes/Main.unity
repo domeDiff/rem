@@ -1251,7 +1251,7 @@ Transform:
   m_GameObject: {fileID: 389476674}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.04700017, y: -0.16600001, z: 0}
+  m_LocalPosition: {x: -0.04700017, y: -0.16600001, z: 0.218}
   m_LocalScale: {x: 0.05, y: 0.03, z: 0.24}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1500,7 +1500,7 @@ Transform:
   m_GameObject: {fileID: 517401678}
   serializedVersion: 2
   m_LocalRotation: {x: 0.655455, y: -0.26529, z: -0.26529005, w: 0.655455}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.217}
   m_LocalScale: {x: 0.049999997, y: 0.03, z: 0.14}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4729,6 +4729,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClockUI
   clockTimeText: {fileID: 1429196465}
+  displayDuration: 2
 --- !u!4 &2000556591
 Transform:
   m_ObjectHideFlags: 0
