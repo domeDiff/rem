@@ -4,7 +4,12 @@ using UnityEngine;
 public class ClockInteractable : MonoBehaviour, IInteractable
 {
     [SerializeField] private ClockUI clockUI;
-    [SerializeField] private DreamState dreamState; 
+    [SerializeField] private DreamState dreamState;
+
+    [Header("Clock hands")]
+    [SerializeField] private Transform minuteHand;
+    [SerializeField] private Transform hourHand;
+
     public void Interact()
     {
         clockUI.ShowTime();
@@ -18,16 +23,20 @@ public class ClockInteractable : MonoBehaviour, IInteractable
 
         if(dreamState.timeSinceClockSeen >= dreamState.clockAnamolyTime)
         {
-            Debug.Log("still reads 3:17 AM");
+            TriggerClockAnamoly();
         }
 
         else
         {
             Debug.Log("reads 3:17 AM");
         }
+    }
 
-        dreamState.hasSeenClock = true;
+    private void TriggerClockAnamoly()
+    {
+        Debug.Log("still reads 3:17 AM");
 
-        
+        minuteHand.localRotation = Quaternion.Euler(0f, 0f, 120f);
+        hourHand.localRotation = Quaternion.Euler(0f, 0f, 35f);
     }
 }
